@@ -57,8 +57,9 @@ class couchbase
   $data_dir          = $::couchbase::params::data_dir,
   $index_dir        = undef,
   $download_url_base = $::couchbase::params::download_url_base,
+  $package_name      = $::couchbase::params::package_name,
 ) inherits ::couchbase::params {
-  
+
   # TODO: Add parameter data validation
 
   # Define initialized node as a couchbase node (This will always be true
@@ -113,7 +114,7 @@ class couchbase
 
   }
   elsif $ensure == absent {
-    
+
     # Removing node init lock.
     file {$::couchbase::params::node_init_lock:
       ensure => absent,
@@ -146,5 +147,5 @@ class couchbase
 
     Anchor['couchbase::end']
   }
-  
+
 }
