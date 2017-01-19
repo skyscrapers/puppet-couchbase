@@ -55,7 +55,7 @@ class couchbase
   $ensure            = 'present',
   $autofailover      = $::couchbase::params::autofailover,
   $data_dir          = $::couchbase::params::data_dir,
-  $index_dir        = undef,
+  $index_dir         = undef,
   $download_url_base = $::couchbase::params::download_url_base,
   $package_name      = $::couchbase::params::package_name,
 ) inherits ::couchbase::params {
@@ -102,6 +102,8 @@ class couchbase
       password     => $password,
       server_group => $server_group,
       autofailover => $autofailover,
+      data_dir     => $data_dir,
+      index_dir    => $index_dir,
     }
 
     ->
