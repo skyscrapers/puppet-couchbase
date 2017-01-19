@@ -30,7 +30,8 @@ class couchbase::config (
   $server_group = 'default',
   $ensure       = $::couchbase::ensure,
   $autofailover = $::couchbase::params::autofailover,
-
+  $data_dir     = $::couchbase::data_dir,
+  $index_dir    = $::couchbase::index_dir,
 ) {
 
   include couchbase::params
@@ -41,7 +42,7 @@ class couchbase::config (
     $_autofailover = 1
   }
 
-  
+
   # Intitialize a script file
   concat { $::couchbase::params::node_init_script:
     owner => '0',
@@ -123,7 +124,7 @@ class couchbase::config (
     notify  => Exec['couchbase-cluster-setup'],
   }
 
-  # Collect cluster node entries for config (from stored configs & PuppetDB)  
+  # Collect cluster node entries for config (from stored configs & PuppetDB)
   Couchbase::Couchbasenode <<| server_group == $server_group |>> ->
 
 
