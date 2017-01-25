@@ -19,7 +19,8 @@ class couchbase::install (
   $version           = $couchbase::version,
   $edition           = $couchbase::edition,
   $method            = $couchbase::install_method,
-  $download_url_base = $couchbase::download_url_base
+  $download_url_base = $couchbase::download_url_base,
+  $package_name      = $couchbase::package_name,
 ) {
   include couchbase::params
 
@@ -51,9 +52,9 @@ class couchbase::install (
       }
     }
     'package': {
-      package {$::couchbase::package_name:
+      package { $package_name:
         ensure  => $::couchbase::version,
-        name    => $::couchbase::package_name,
+        name    => $package_name,
         notify  => Exec['couchbase-init'],
         require => Package[$::couchbase::params::openssl_package],
       }
